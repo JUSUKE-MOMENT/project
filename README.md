@@ -1,4 +1,4 @@
-# Password Generator
+# Password Generator2
 
 Password Generator — учебный веб-проект на React и TypeScript для генерации случайных паролей с настраиваемыми параметрами.
 
