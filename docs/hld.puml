@@ -1,0 +1,39 @@
+@startuml
+' HLD: KeyForge / Password Generator
+left to right direction
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+actor "Пользователь" as User
+
+node "Браузер пользователя" {
+  package "KeyForge — React + TypeScript" {
+    component "App\napp/ui/App.tsx" as App
+    component "Header\nwidgets/Header" as Header
+    component "PasswordGenerator UI\nfeatures/PasswordGenerator/ui" as PasswordUI
+    component "ThemeSwitcher UI\nfeatures/ThemeSwitcher/ui" as ThemeUI
+    component "useTheme\nfeatures/ThemeSwitcher/model" as ThemeModel
+    component "usePasswordGenerator\nfeatures/PasswordGenerator/model\n(запланирована реализация)" as PasswordModel #FFF2CC
+  }
+
+  component "DOM + CSS / SCSS" as DOM
+  component "Web Crypto API\n(планируется)" as Crypto #FFF2CC
+  component "Clipboard API\n(планируется)" as Clipboard #FFF2CC
+}
+
+User --> App : взаимодействует
+
+App --> Header : отображает
+App --> PasswordUI : отображает
+
+Header --> ThemeUI : включает
+
+ThemeUI --> ThemeModel : переключение темы
+ThemeModel --> DOM : data-theme / CSS
+
+PasswordUI ..> PasswordModel : будущая логика
+PasswordModel ..> Crypto : случайные значения
+PasswordUI ..> Clipboard : копирование пароля
+
+@enduml
